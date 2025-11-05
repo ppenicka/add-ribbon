@@ -1,13 +1,13 @@
-<script setup>
-import { ref, watch, onUnmounted } from "vue";
+<script setup lang="ts">
+import { ref, watch, onUnmounted, type Ref } from "vue";
 import { processImage } from "../utils";
 import { SCREENS } from "../constants";
 
-const selectedScreen = ref(0);
-const previewUrl = ref(null);
-const originalFileName = ref(null);
-const uploadedImage = ref(null);
-const imageFormat = ref("png");
+const selectedScreen: Ref<number> = ref(0);
+const previewUrl: Ref<string | null> = ref(null);
+const originalFileName: Ref<string | null> = ref(null);
+const uploadedImage: Ref<HTMLImageElement | null> = ref(null);
+const imageFormat: Ref<string> = ref("png");
 
 const handleImageUpload = (e) => {
   const file = e.target.files[0];
@@ -22,7 +22,7 @@ const handleImageUpload = (e) => {
       uploadedImage.value = img;
       processImage(img, selectedScreen.value, previewUrl, imageFormat);
     };
-    img.src = event.target.result;
+    img.src = event.target?.result as string;
   };
   reader.readAsDataURL(file);
 };
@@ -32,7 +32,7 @@ const handleDownload = () => {
 
   const link = document.createElement("a");
   const screen = SCREENS[selectedScreen.value];
-  const baseName = originalFileName.value.split(".")[0];
+  const baseName = originalFileName.value?.split(".")[0];
 
   link.download = `${baseName}-${screen.suffix}-with-ribbon.${imageFormat.value}`;
   link.href = previewUrl.value;

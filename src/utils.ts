@@ -8,11 +8,13 @@ export const processImage = (img, screenIndex, previewUrl, imageFormat) => {
 
   const quality = 0.9;
   const screen = SCREENS[screenIndex];
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
 
+  const canvas = document.createElement("canvas");
   canvas.width = screen.size[0];
   canvas.height = screen.size[1];
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
 
   // Draw the image first, stretched to fit canvas
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
