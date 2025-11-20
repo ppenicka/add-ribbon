@@ -6,7 +6,7 @@ export const processImage = (img, screenIndex, previewUrl, imageFormat) => {
     URL.revokeObjectURL(previewUrl.value);
   }
 
-  const quality = 0.9;
+  const quality = 0.95;
   const screen = SCREENS[screenIndex];
 
   const canvas = document.createElement("canvas");
@@ -16,8 +16,38 @@ export const processImage = (img, screenIndex, previewUrl, imageFormat) => {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  // Draw the image first, stretched to fit canvas
-  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  // Calculate aspect ratios
+  const targetAspect = canvas.width / canvas.height;
+  const imageAspect = img.width / img.height;
+
+  let sourceX = 0;
+  let sourceY = 0;
+  let sourceWidth = img.width;
+  let sourceHeight = img.height;
+
+  // Crop image to match target aspect ratio (centered crop)
+  if (imageAspect > targetAspect) {
+    // Image is wider than target - crop width
+    sourceWidth = img.height * targetAspect;
+    sourceX = (img.width - sourceWidth) / 2;
+  } else if (imageAspect < targetAspect) {
+    // Image is taller than target - crop height
+    sourceHeight = img.width / targetAspect;
+    sourceY = (img.height - sourceHeight) / 2;
+  }
+
+  // Draw the cropped image, scaled to fit canvas
+  ctx.drawImage(
+    img,
+    sourceX,
+    sourceY,
+    sourceWidth,
+    sourceHeight,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
 
   // Create a temporary canvas for the ribbon overlay
   const ribbonCanvas = document.createElement("canvas");
