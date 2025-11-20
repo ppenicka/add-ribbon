@@ -2,8 +2,15 @@ export const SCREENS = [
   {
     name: "MacBook Pro 16",
     suffix: "mac-16",
-    size: [3840, 2160],
+    size: [3456, 2234],
     ribbonHeight: 38,
+    borderRadius: 15,
+  },
+  {
+    name: "MacBook Pro 15",
+    suffix: "mac-16",
+    size: [2880, 1800],
+    ribbonHeight: 75,
     borderRadius: 15,
   },
   {
@@ -25,6 +32,20 @@ export const SCREENS = [
     suffix: "4k",
     size: [3840, 2160],
     ribbonHeight: 38,
+    borderRadius: 15,
+  },
+  {
+    name: "2.5k External Display",
+    suffix: "2-5k",
+    size: [2560, 1440],
+    ribbonHeight: 75,
+    borderRadius: 15,
+  },
+  {
+    name: "HD 1080p External Display",
+    suffix: "HD-1080p",
+    size: [1920, 1080],
+    ribbonHeight: 75,
     borderRadius: 15,
   },
 ];
