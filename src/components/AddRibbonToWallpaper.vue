@@ -39,6 +39,10 @@ const handleDownload = () => {
   link.click();
 };
 
+const buyMeACoffee = () => {
+  window.open("https://buymeacoffee.com/ppenicka", "_blank");
+};
+
 watch(selectedScreen, (newScreenIndex) => {
   if (uploadedImage.value) {
     processImage(uploadedImage.value, newScreenIndex, previewUrl, imageFormat);
@@ -84,9 +88,14 @@ onUnmounted(() => {
         <div class="preview-container">
           <img :src="previewUrl" alt="Preview" class="preview-image" />
         </div>
-        <button @click="handleDownload" class="download-button">
-          Download
-        </button>
+        <div class="button-container">
+          <button @click="handleDownload" class="download-button">
+            Download
+          </button>
+          <button class="download-button" @click="buyMeACoffee">
+            Buy Me a Coffee
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -151,6 +160,11 @@ onUnmounted(() => {
   padding: 1rem 0;
   background-color: white;
   border-radius: 1rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
 }
 
 .preview-image {
