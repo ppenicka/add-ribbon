@@ -60,7 +60,13 @@ onUnmounted(() => {
 <template>
   <div class="add-ribbon-container">
     <div class="container">
-      <h1 class="title">Add Black Ribbon to Image</h1>
+      <h1 class="title">Add Black Ribbon to a Wallpaper</h1>
+      <p class="description">
+        This tool adds a black ribbon to the top of your wallpaper, letting you
+        visually hide the notch on newer MacBooks's top panel. It helps remove
+        distraction, calm your OCD, and make your workspace feel clean and
+        focused.
+      </p>
 
       <div class="screen-selector">
         <label class="label">Select Screen:</label>
@@ -117,6 +123,11 @@ onUnmounted(() => {
 .title {
   font-size: 1.875rem;
   font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.description {
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
