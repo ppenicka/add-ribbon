@@ -63,7 +63,7 @@ onUnmounted(() => {
       <h1 class="title">Add Black Ribbon to a Wallpaper</h1>
       <p class="description">
         This tool adds a black ribbon to the top of your wallpaper, letting you
-        visually hide the notch on newer MacBooks's top panel. It helps remove
+        visually hide the top panel notch on newer MacBooks. It helps remove
         distraction, calm your OCD, and make your workspace feel clean and
         focused.
       </p>
@@ -102,6 +102,17 @@ onUnmounted(() => {
             Buy Me a Coffee
           </button>
         </div>
+      </div>
+
+      <div class="footer">
+        <a
+          href="https://ppenicka.me"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+        >
+          ppenicka.me
+        </a>
       </div>
     </div>
   </div>
@@ -198,5 +209,23 @@ onUnmounted(() => {
 
 .download-button:hover {
   background-color: #35a372;
+}
+
+.footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #42b983;
 }
 </style>
