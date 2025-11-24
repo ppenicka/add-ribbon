@@ -69,7 +69,7 @@ onUnmounted(() => {
       </p>
 
       <div class="screen-selector">
-        <label class="label">Select Screen:</label>
+        <label class="label">Select Screen Size:</label>
         <select v-model.number="selectedScreen" class="select">
           <option
             v-for="(screen, index) in SCREENS"
@@ -82,7 +82,9 @@ onUnmounted(() => {
       </div>
 
       <div class="upload-section">
+        <label for="files" class="label">Select Wallpaper:</label>
         <input
+          id="file-upload-button"
           type="file"
           accept="image/*"
           @change="handleImageUpload"
@@ -96,7 +98,7 @@ onUnmounted(() => {
         </div>
         <div class="button-container">
           <button @click="handleDownload" class="download-button">
-            Download
+            Download Wallpaper with Ribbon
           </button>
           <button class="download-button" @click="buyMeACoffee">
             Buy Me a Coffee
@@ -154,11 +156,21 @@ onUnmounted(() => {
 
 .select {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
   font-size: 1rem;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+  outline: none;
+}
+
+.select:focus {
+  outline: none;
 }
 
 .upload-section {
@@ -166,11 +178,12 @@ onUnmounted(() => {
 }
 
 .file-input {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .preview-section {
@@ -213,7 +226,7 @@ onUnmounted(() => {
 
 .footer {
   margin-top: 3rem;
-  padding-top: 2rem;
+  padding-top: 1rem;
   text-align: center;
   border-top: 1px solid #e5e5e5;
 }
