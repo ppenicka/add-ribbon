@@ -8,7 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.0"
+    "vue": "^3.4.0",
+    "vue3-google-adsense": "^1.2.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",

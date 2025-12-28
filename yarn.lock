@@ -469,6 +469,11 @@ vite@^5.0.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
+vue3-google-adsense@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/vue3-google-adsense/-/vue3-google-adsense-1.2.2.tgz#d1cab7846be297fbbb277d26bdee247d5ad62913"
+  integrity sha512-w1J7h5RHIN94UhPQ0gZzq57SfHJ17fVafkPxKMOw2xcFkZYuATNMjP3pnEmj+Ggpm2sj8X8PN0+mSL5AviBa0g==
+
 vue@^3.4.0:
   version "3.5.22"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.22.tgz#2b8ddb94ee4b640ef12fe7f6efe1cf16f3b582e7"

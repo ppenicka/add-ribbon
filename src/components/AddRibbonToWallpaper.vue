@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted, type Ref } from "vue";
+import { Adsense } from "vue3-google-adsense";
+
 import { processImage } from "../utils";
 import { SCREENS } from "../constants";
 
@@ -60,6 +62,14 @@ onUnmounted(() => {
 <template>
   <div class="add-ribbon-container">
     <div class="container">
+      <Adsense
+        adStyle="display:block"
+        format="auto"
+        full-width-responsive="true"
+        clientId="ca-pub-7400192407459006"
+        slotId="7750911123"
+      >
+      </Adsense>
       <h1 class="title">Add Black Ribbon to a Wallpaper</h1>
       <p class="description">
         This tool adds a black ribbon to the top of your wallpaper, letting you
