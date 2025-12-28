@@ -62,24 +62,22 @@ onUnmounted(() => {
 <template>
   <div class="add-ribbon-container">
     <div class="container">
-      <Adsense
-        adStyle="display:block"
-        format="auto"
-        full-width-responsive="true"
-        clientId="ca-pub-7400192407459006"
-        slotId="7750911123"
-      >
-      </Adsense>
       <h1 class="title">Add Black Ribbon to a Wallpaper</h1>
       <p class="description">
         This tool adds a black ribbon to the top of your wallpaper, letting you
-        visually hide the top panel notch on newer MacBooks. It helps remove
+        visually hide the top panel notch on newer MacBooks. This helps remove
         distraction, calm your OCD, and make your workspace feel clean and
         focused.
       </p>
 
+      <img
+        src="/images/before-after.png"
+        alt="Before and After"
+        class="before-after-image"
+      />
+
       <div class="screen-selector">
-        <label class="label">Select Screen Size:</label>
+        <label class="label">1. Select Screen Size:</label>
         <select v-model.number="selectedScreen" class="select">
           <option
             v-for="(screen, index) in SCREENS"
@@ -92,7 +90,7 @@ onUnmounted(() => {
       </div>
 
       <div class="upload-section">
-        <label for="files" class="label">Select Wallpaper:</label>
+        <label for="files" class="label">2. Select Wallpaper:</label>
         <input
           id="file-upload-button"
           type="file"
@@ -103,6 +101,8 @@ onUnmounted(() => {
       </div>
 
       <div v-if="previewUrl" class="preview-section">
+        <label for="files" class="label">3. Enjoy :)</label>
+
         <div class="preview-container">
           <img :src="previewUrl" alt="Preview" class="preview-image" />
         </div>
@@ -154,6 +154,13 @@ onUnmounted(() => {
   margin-bottom: 1.5rem;
 }
 
+.before-after-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+}
+
 .screen-selector {
   margin-bottom: 1rem;
 }
@@ -196,20 +203,16 @@ onUnmounted(() => {
   width: 100%;
 }
 
-.preview-section {
-  margin-top: 2rem;
-}
-
 .preview-container {
   margin: 1em 0;
-  padding: 1rem 0;
   background-color: white;
   border-radius: 1rem;
 }
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .preview-image {
@@ -228,6 +231,7 @@ onUnmounted(() => {
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  width: 100%;
 }
 
 .download-button:hover {
