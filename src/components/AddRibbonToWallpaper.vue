@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted, type Ref } from "vue";
-import { Adsense } from "vue3-google-adsense";
 
 import { processImage } from "../utils";
 import { SCREENS } from "../constants";
