@@ -1,6 +1,12 @@
 import { SCREENS } from "./constants";
 
-export const processImage = (img, screenIndex, previewUrl, imageFormat) => {
+export const processImage = (
+  img: HTMLImageElement,
+  screenIndex: number,
+  previewUrl: { value: string | null },
+  imageFormat: { value: string },
+  isTahoe = false
+) => {
   // Revoke previous blob URL if it exists
   if (previewUrl.value?.startsWith("blob:")) {
     URL.revokeObjectURL(previewUrl.value);
@@ -94,6 +100,31 @@ export const processImage = (img, screenIndex, previewUrl, imageFormat) => {
 
   // Draw the ribbon overlay on top of the image
   ctx.drawImage(ribbonCanvas, 0, 0);
+
+  // If Tahoe style: add black rounded cutout corners at the bottom
+  if (isTahoe) {
+    const r = screen.borderRadius;
+    const w = canvas.width;
+    const h = canvas.height;
+
+    ctx.fillStyle = "black";
+
+    // Bottom-left corner: black quarter circle
+    ctx.beginPath();
+    ctx.moveTo(0, h - r);
+    ctx.arcTo(0, h, r, h, r);
+    ctx.lineTo(0, h);
+    ctx.closePath();
+    ctx.fill();
+
+    // Bottom-right corner: black quarter circle
+    ctx.beginPath();
+    ctx.moveTo(w - r, h);
+    ctx.arcTo(w, h, w, h - r, r);
+    ctx.lineTo(w, h);
+    ctx.closePath();
+    ctx.fill();
+  }
 
   const fallbackToPng = () => {
     previewUrl.value = canvas.toDataURL("image/png");

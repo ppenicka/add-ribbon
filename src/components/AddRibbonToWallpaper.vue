@@ -2,9 +2,10 @@
 import { ref, watch, onUnmounted, type Ref } from "vue";
 
 import { processImage } from "../utils";
-import { SCREENS } from "../constants";
+import { SCREENS, SCREEN_OPTIONS, getScreenIndex } from "../constants";
 
 const selectedScreen: Ref<number> = ref(0);
+const isTahoe: Ref<boolean> = ref(false);
 const previewUrl: Ref<string | null> = ref(null);
 const originalFileName: Ref<string | null> = ref(null);
 const uploadedImage: Ref<HTMLImageElement | null> = ref(null);
@@ -21,7 +22,13 @@ const handleImageUpload = (e) => {
     const img = new Image();
     img.onload = () => {
       uploadedImage.value = img;
-      processImage(img, selectedScreen.value, previewUrl, imageFormat);
+      processImage(
+        img,
+        getScreenIndex(selectedScreen.value, isTahoe.value),
+        previewUrl,
+        imageFormat,
+        isTahoe.value
+      );
     };
     img.src = event.target?.result as string;
   };
@@ -32,7 +39,7 @@ const handleDownload = () => {
   if (!previewUrl.value) return;
 
   const link = document.createElement("a");
-  const screen = SCREENS[selectedScreen.value];
+  const screen = SCREENS[getScreenIndex(selectedScreen.value, isTahoe.value)];
   const baseName = originalFileName.value?.split(".")[0];
 
   link.download = `${baseName}-${screen.suffix}-with-ribbon.${imageFormat.value}`;
@@ -44,11 +51,21 @@ const buyMeACoffee = () => {
   window.open("https://buymeacoffee.com/ppenicka", "_blank");
 };
 
-watch(selectedScreen, (newScreenIndex) => {
-  if (uploadedImage.value) {
-    processImage(uploadedImage.value, newScreenIndex, previewUrl, imageFormat);
-  }
-});
+watch(
+  [selectedScreen, isTahoe],
+  () => {
+    if (uploadedImage.value) {
+      processImage(
+        uploadedImage.value,
+        getScreenIndex(selectedScreen.value, isTahoe.value),
+        previewUrl,
+        imageFormat,
+        isTahoe.value
+      );
+    }
+  },
+  { deep: true }
+);
 
 // Cleanup object URLs on unmount
 onUnmounted(() => {
@@ -79,13 +96,20 @@ onUnmounted(() => {
         <label class="label">1. Select Screen Size:</label>
         <select v-model.number="selectedScreen" class="select">
           <option
-            v-for="(screen, index) in SCREENS"
+            v-for="(option, index) in SCREEN_OPTIONS"
             :key="index"
             :value="index"
           >
-            {{ screen.name }} ({{ screen.size[0] }}x{{ screen.size[1] }})
+            {{ option.name }} ({{ option.size[0] }}x{{ option.size[1] }})
           </option>
         </select>
+      </div>
+
+      <div class="tahoe-option">
+        <label class="checkbox-label">
+          <input v-model="isTahoe" type="checkbox" class="checkbox" />
+          MacOS Tahoe (rounded bottom corners)
+        </label>
       </div>
 
       <div class="upload-section">
@@ -187,6 +211,24 @@ onUnmounted(() => {
 
 .select:focus {
   outline: none;
+}
+
+.tahoe-option {
+  margin-bottom: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
 }
 
 .upload-section {
